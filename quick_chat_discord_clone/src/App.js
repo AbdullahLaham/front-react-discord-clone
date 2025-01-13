@@ -2,13 +2,27 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthScreen from './pages/AuthScreen';
+import Channel from './pages/Channel';
+import Conversation from './pages/Conversation';
+import ServerPage from './pages/ServerPage';
+import ServerLayout from './pages/layouts/ServerLayout';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route index element={<AuthScreen />} />
-        
+        <Route index element={<AuthScreen />} />
+        {/* Channel Route */}
+        <Route path="server/:serverId" element={<ServerLayout />}>
+          {/* Default page for the server */}
+          <Route index element={<ServerPage />} />
+          {/* Channel page */}
+          <Route path="channel/:channelId" element={<Channel />} />
+          {/* Conversation page */}
+          <Route path="conversation/:conversationId" element={<Conversation />} />
+        </Route>
+        {/* <Route path="server/:serverId/channel/:channelId" element={<Channel />} /> */}
+          
       </Routes>
     </BrowserRouter>
   );
